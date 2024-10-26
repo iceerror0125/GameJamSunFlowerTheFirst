@@ -7,13 +7,13 @@ using UnityEngine;
 
 public class Message
 {
-    public EventType eventType;
+    public MessageType msgType;
     public object param;
     public object returnValue;
 
-    public Message(EventType eventType, object param = null)
+    public Message(MessageType msgType, object param = null)
     {
-        this.eventType = eventType;
+        this.msgType = msgType;
         this.param = param;
     }
     public Message(object param)
@@ -24,9 +24,9 @@ public class Message
 
 public class Observer : Singleton<Observer>
 {
-    private Dictionary<EventType, List<Action<Message>>> observer = new();
+    private Dictionary<MessageType, List<Action<Message>>> observer = new();
 
-    public void Subscribe(EventType type, Action<Message> callBack)
+    public void Subscribe(MessageType type, Action<Message> callBack)
     {
         if (observer.ContainsKey(type))
         {
@@ -37,7 +37,7 @@ public class Observer : Singleton<Observer>
             observer.Add(type, new List<Action<Message>> { callBack });
         }
     }
-    public void UnSubscribe(EventType type, Action<Message> callBack)
+    public void UnSubscribe(MessageType type, Action<Message> callBack)
     {
         if (observer.ContainsKey(type))
         {
@@ -57,7 +57,7 @@ public class Observer : Singleton<Observer>
     }
     public void Announce(Message message)
     {
-        EventType type = message.eventType;
+        MessageType type = message.msgType;
         if (observer.ContainsKey(type))
         {
             foreach (Action<Message> action in observer[type])
@@ -69,12 +69,5 @@ public class Observer : Singleton<Observer>
         {
             Debug.LogError("Announce fail: Event type doesn't exist");
         }
-    }
-
-
-    public object GetCallBack(Message callBackMsg)
-    {
-        Announce(callBackMsg);
-        return callBackMsg.returnValue;
     }
 }

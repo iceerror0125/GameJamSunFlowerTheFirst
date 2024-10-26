@@ -16,7 +16,10 @@ public class PlayerGroundState : PlayerState
 
     public override void Update()
     {
-       
+        if (GameManager.Instance.IsFreeze)
+        {
+            player.stateHandler.ChangeState(player.stateHandler.idleState);
+        }
     }
 
     public override void Exit()

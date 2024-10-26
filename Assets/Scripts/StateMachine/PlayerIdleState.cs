@@ -24,6 +24,9 @@ public class PlayerIdleState : PlayerGroundState
     public override void Update()
     {
         base.Update();
+        if (GameManager.Instance.IsFreeze)
+            return;
+        
         isMove = IsMove();
         if (isMove)
         {

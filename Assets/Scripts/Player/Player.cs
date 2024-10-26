@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     public PlayerStateHandler stateHandler { get; private set; }
     public PlayerProperties properties { get; private set; }
+    private InteractableItem interactableItem;
 
     private void Start()
     {
@@ -57,5 +58,23 @@ public class Player : MonoBehaviour
     public void Idle()
     {
         rb.velocity = Vector2.zero;
+    }
+
+    public void AddInteractableItem(InteractableItem item)
+    {
+        this.interactableItem = item;
+    }
+
+    public void RemoveInteractableItem()
+    {
+        interactableItem = null;
+    }
+
+    public void InteractWithItem()
+    {
+        if (interactableItem != null)
+        {
+            interactableItem.Interact();
+        }
     }
 }
