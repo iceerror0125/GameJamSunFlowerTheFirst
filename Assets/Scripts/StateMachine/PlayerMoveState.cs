@@ -34,7 +34,7 @@ public class PlayerMoveState : PlayerGroundState
     {
         base.Update();
         
-        CheckMovingState(KeyCode.LeftArrow, MoveDirection.Left);
+        CheckMovingState(InputConstant.MoveLeft, MoveDirection.Left);
         CheckMovingState(InputConstant.MoveRight, MoveDirection.Right);
         CheckMovingState(InputConstant.MoveUp, MoveDirection.Up);
         CheckMovingState(InputConstant.MoveDown, MoveDirection.Down);

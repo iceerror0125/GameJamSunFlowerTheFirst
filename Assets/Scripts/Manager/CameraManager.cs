@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
 
 public class CameraManager : SingletonMono<CameraManager>
 {
    [SerializeField] private Camera mainCamera;
-   private PostProcessVolume postProcessVolume;
+   private Volume postProcessVolume;
 
    private void Start()
    {
@@ -17,7 +18,7 @@ public class CameraManager : SingletonMono<CameraManager>
 
    private void GetComponent()
    {
-      postProcessVolume = mainCamera.GetComponent<PostProcessVolume>();
+      postProcessVolume = mainCamera.GetComponent<Volume>();
    }
 
    public void EnableBlurEffect()

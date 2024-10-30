@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public PlayerStateHandler stateHandler { get; private set; }
     public PlayerProperties properties { get; private set; }
-    private InteractableItem interactableItem;
+    private BaseItem interactableItem;
 
     private void Start()
     {
@@ -53,6 +53,15 @@ public class Player : MonoBehaviour
     {
         Vector2 directionVector = directions[direction];
         rb.velocity = directionVector * properties.moveSpeed;
+        ChangeDirection(directionVector);
+    }
+
+    private void ChangeDirection(Vector2 directionVector)
+    {
+        float currentX = anim.transform.localScale.x;
+        float scaleX = directionVector.x != 0 ? directionVector.x *-1: currentX;
+        if (!Mathf.Approximately(currentX, scaleX))
+         anim.transform.localScale = new Vector3(scaleX, 1, 1);
     }
 
     public void Idle()
@@ -60,7 +69,7 @@ public class Player : MonoBehaviour
         rb.velocity = Vector2.zero;
     }
 
-    public void AddInteractableItem(InteractableItem item)
+    public void AddInteractableItem(BaseItem item)
     {
         this.interactableItem = item;
     }

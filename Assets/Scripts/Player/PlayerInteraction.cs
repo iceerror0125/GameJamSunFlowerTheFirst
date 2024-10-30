@@ -68,7 +68,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void AddItem(Collider2D other)
     {
-        InteractableItem item = other.GetComponent<InteractableItem>();
+        BaseItem item = other.GetComponent<BaseItem>();
         if (item == null)
             return;
         player.AddInteractableItem(item);

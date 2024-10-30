@@ -24,6 +24,30 @@ public class InteractableItemUI : MonoBehaviour
    
 
    private bool isCollectable;
+   private ItemData data;
+   private bool isChanged;
+
+   private void OnEnable()
+   {
+      Observer.Instance.Subscribe(MessageType.ChangeToPart2, OnChangeSprite);
+   }
+
+   private void OnDisable()
+   {
+      Observer.Instance.UnSubscribe(MessageType.ChangeToPart2, OnChangeSprite);
+   }
+
+   private void OnChangeSprite(Message msg)
+   {
+      isChanged = true;
+      if (data.secondSprite != null)
+         image.sprite = data.secondSprite;
+      if (string.IsNullOrEmpty(data.description2))
+      {
+         description.text = data.description2;
+      }
+   }
+
    public void Show(ItemData itemData)
    {
       ChangeCanvasBehaviour(1);
@@ -88,10 +112,25 @@ public class InteractableItemUI : MonoBehaviour
 
    private void SetData(ItemData itemData)
    {
+      if (data != null && data.id == itemData.id)
+         return;
+
+      int part = GameManager.Instance.part;
+      data = itemData;
       itemName.text = itemData.name;
       description.text = itemData.description;
-      image.sprite = itemData.sprite;
+      if (part == 2 && !string.IsNullOrEmpty(itemData.description2))
+      {
+         description.text = itemData.description2;
+      }
       isCollectable = itemData.canCollect;
+      
+      image.sprite = itemData.sprite;
+      if (part == 2 && itemData.secondSprite != null)
+      {
+         image.sprite = itemData.secondSprite;
+
+      }
       
       if (!string.IsNullOrEmpty(itemData.detail))
       {
