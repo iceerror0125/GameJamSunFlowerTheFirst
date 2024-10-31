@@ -10,7 +10,7 @@ public class ToNewSceneItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene("ChapThree");
+            SceneManager.LoadScene("Chap3Sence");
         }
     }
 }

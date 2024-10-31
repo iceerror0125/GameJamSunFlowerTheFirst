@@ -33,6 +33,7 @@ public class CameraManager : SingletonMono<CameraManager>
 
    private void OnOffBlurEffect(bool isOn)
    {
+      if (postProcessVolume == null) return;
       postProcessVolume.enabled = isOn;
    }
 }
