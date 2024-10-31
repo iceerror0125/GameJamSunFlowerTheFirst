@@ -55,6 +55,11 @@ public class Inventory : SingletonMono<Inventory>
       GameManager.Instance.UnFreeze();
    }
 
+   public bool IsContainRequiredId(int requiredId)
+   {
+      return inventoryData.inventoryData.Contains(requiredId);
+   }
+
    public void AddNewItem(int id)
    {
       if (inventoryData.inventoryData.Contains(id))
