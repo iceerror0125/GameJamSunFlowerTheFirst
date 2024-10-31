@@ -50,6 +50,7 @@ public class InteractableItemUI : MonoBehaviour
 
    public void Show(ItemData itemData)
    {
+      AudioManager.Instance.OpenItem();
       ChangeCanvasBehaviour(1);
       SetData(itemData);
       DoScaleAnimation(1, CheckIsCollectable);

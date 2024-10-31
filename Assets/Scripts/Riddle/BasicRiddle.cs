@@ -24,16 +24,15 @@ namespace Riddle
             count++;
             if (count >= itemCount)
             {
-                Debug.Log("Congrat");
-                // Observer.Instance.Announce(new Message(MessageType.ShowPartical));
-                // InteractItemUIManager.Instance.CloseDetail();
-                // Observer.Instance.Announce(new Message(MessageType.ClaimReward,2));
                 StartCoroutine(RewardRoutine());
             }
         }
         private IEnumerator RewardRoutine()
         {
-            InteractItemUIManager.Instance.CloseDetail();
+            // InteractItemUIManager.Instance.CloseDetail();
+            AudioManager.Instance.CorrectRiddle();
+            yield return new WaitForSeconds(0.2f);
+            GetComponent<RiddleItemUI>().Hide();
             yield return new WaitForSeconds(0.5f);
             Observer.Instance.Announce(new Message(MessageType.ClaimReward,rewardId));
         }

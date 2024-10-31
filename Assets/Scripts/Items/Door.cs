@@ -32,7 +32,7 @@ public class Door : BaseItem
         }
         else
         {
-            // todo: announce can't open
+            AudioManager.Instance.DoorLocked();
         }
     }
     

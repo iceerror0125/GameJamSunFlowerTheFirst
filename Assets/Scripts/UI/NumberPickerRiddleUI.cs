@@ -49,7 +49,10 @@ public class NumberPickerRiddleUI : MonoBehaviour
 
     private IEnumerator RewardRoutine()
     {
-        InteractItemUIManager.Instance.CloseDetail();
+        // InteractItemUIManager.Instance.CloseDetail();
+        AudioManager.Instance.CorrectRiddle();
+        yield return new WaitForSeconds(0.2f);
+        GetComponent<RiddleItemUI>().Hide();
         yield return new WaitForSeconds(0.3f);
         Observer.Instance.Announce(new Message(MessageType.ClaimReward,rewardId));
     }

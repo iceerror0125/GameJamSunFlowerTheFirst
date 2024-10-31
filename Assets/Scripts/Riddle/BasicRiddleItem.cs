@@ -29,6 +29,7 @@ namespace Riddle
             if (distance < maxDistance)
             {
                 SetToParent(); 
+                AudioManager.Instance.Click();
                 Observer.Instance.Announce(new Message(MessageType.PlaceCorrectItem));
             }
         }

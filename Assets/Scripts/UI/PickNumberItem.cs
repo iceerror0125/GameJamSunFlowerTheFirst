@@ -24,6 +24,7 @@ public class PickNumberItem : MonoBehaviour
             value = 0;
         }
         SetTextValue();
+        AudioManager.Instance.Click();
     }
 
     public void DecreaseValue()
@@ -34,6 +35,7 @@ public class PickNumberItem : MonoBehaviour
             value = 9;
         }
         SetTextValue();
+        AudioManager.Instance.Click();
     }
 
     private void SetTextValue()
